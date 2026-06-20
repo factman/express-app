@@ -3,7 +3,7 @@ import {
   appErrorHandler,
   notFoundErrorHandler,
 } from "./src/helpers/errorHandlers.js";
-import { initDB } from "./src/models/index.js";
+import { initDB } from "./src/sequelize.js";
 
 const app = express();
 const port = process.env.PORT;
