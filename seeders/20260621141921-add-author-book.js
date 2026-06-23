@@ -1,9 +1,9 @@
 "use strict";
-import { hash } from "node:crypto";
 import { config } from "dotenv";
 
 config();
 
+const bookId = process.env.SEED_BOOK_ID;
 const userId = process.env.SEED_USER_ID;
 
 /** @type {import('sequelize-cli').Migration} */
@@ -18,17 +18,22 @@ export default {
      *   isBetaMember: false
      * }], {});
      */
-    await queryInterface.bulkInsert("Users", [
+    await queryInterface.bulkInsert("Books", [
       {
-        id: userId,
-        firstName: "John",
-        lastName: "Doe",
-        email: encodeURIComponent("john.doe@gmail.com"),
-        passwordHash: hash("sha256", "Qwerty1234$"),
-        role: "admin",
-        isActive: true,
+        id: bookId,
+        title: "Things Fall Apart",
+        description: "The Center Cannot Hold",
+        isbn: "0123456789",
+        publishedYear: "2000",
+        genre: "Fiction",
+        pageCount: "600",
+        price: "20000",
+        quantity: 10,
+        author: "Chinua Achebe",
+        category: "Novel",
         createdAt: new Date(),
         updatedAt: new Date(),
+        UserId: userId,
       },
     ]);
   },
@@ -40,6 +45,6 @@ export default {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete("Users", { id: userId }, {});
+    await queryInterface.bulkDelete("Books", { id: bookId }, {});
   },
 };

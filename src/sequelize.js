@@ -22,7 +22,9 @@ Object.values(models)
     return model;
   })
   .forEach((model) => {
-    model.associate();
+    if (typeof model.associate === "function") {
+      model.associate();
+    }
   });
 
 export async function initDB() {

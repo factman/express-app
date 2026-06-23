@@ -52,6 +52,14 @@ export class Book extends Model {
           defaultValue: 0,
           validate: { min: 0 },
         },
+        author: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
+        category: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
       },
       { sequelize },
     );
