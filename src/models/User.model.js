@@ -4,10 +4,6 @@ import { DataTypes, Model, Sequelize } from "sequelize";
 import { Book } from "./Book.model.js";
 
 export class User extends Model {
-  get fullname() {
-    return `${this.firstName} ${this.lastName}`;
-  }
-
   /**
    * @type {Sequelize}
    */
@@ -29,24 +25,27 @@ export class User extends Model {
           allowNull: false,
           validate: { notEmpty: true },
         },
-        email: {
-          type: DataTypes.STRING,
-          allowNull: false,
-          unique: true,
-          validate: { isEmail: true },
+        fullName: {
+          type: DataTypes.VIRTUAL,
           get() {
-            /**
-             * @type {string | null}
-             */
-            const rawValue = this.getDataValue("email");
-            return rawValue ? decodeURIComponent(rawValue) : null;
+            return `${this.firstName} ${this.lastName}`;
           },
           /**
            * @param {string} value
            */
           set(value) {
-            this.setDataValue("email", encodeURIComponent(value));
+            const [firstName, lastName] = value
+              .split(" ", 2)
+              .map((v) => v.trim());
+            this.setDataValue("firstName", firstName);
+            this.setDataValue("lastName", lastName);
           },
+        },
+        email: {
+          type: DataTypes.STRING,
+          allowNull: false,
+          unique: true,
+          validate: { isEmail: true },
         },
         passwordHash: {
           type: DataTypes.TEXT,

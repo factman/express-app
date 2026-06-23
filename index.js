@@ -4,6 +4,7 @@ import {
   notFoundErrorHandler,
 } from "./src/helpers/errorHandlers.js";
 import { initDB } from "./src/sequelize.js";
+import { UserService } from "./src/services/User.service.js";
 
 const app = express();
 const port = process.env.PORT;
@@ -21,10 +22,10 @@ initDB()
   });
 
 // Routers init
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   res.status(200).json({
     success: true,
-    data: {},
+    data: await new UserService().getUsers(),
     message: "Welcome to express app",
   });
 });
