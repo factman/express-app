@@ -5,6 +5,7 @@ import {
 } from "./src/helpers/errorHandlers.js";
 import { initDB } from "./src/sequelize.js";
 import { UserService } from "./src/services/User.service.js";
+import { BookService } from "./src/services/Book.service.js";
 
 const app = express();
 const port = process.env.PORT;
@@ -27,6 +28,14 @@ app.get("/", async (req, res) => {
     success: true,
     data: await new UserService().getUsers(),
     message: "Welcome to express app",
+  });
+});
+
+app.get("/books", async (req, res) => {
+  res.status(200).json({
+    success: true,
+    data: await new BookService().getUsers(),
+    message: "Welcome to The Books Page",
   });
 });
 
