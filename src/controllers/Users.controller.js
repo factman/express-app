@@ -35,7 +35,7 @@ export class UsersController {
       successResponse(res, user, "User retrieved successfully");
     }
 
-    throw new AppError(401, "parameter `id` is missing");
+    throw new AppError(400, "parameter `id` is missing");
   }
 
   /**
@@ -56,10 +56,10 @@ export class UsersController {
         successResponse(res, user, "User created successfully", 201);
       }
 
-      throw new AppError(401, "`password` too short, require >= 6 characters");
+      throw new AppError(400, "`password` too short, require >= 6 characters");
     }
 
-    throw new AppError(401, "Invalid parameters");
+    throw new AppError(400, "Invalid parameters");
   }
 
   /**
@@ -77,7 +77,7 @@ export class UsersController {
       successResponse(res, user, "User updated successfully");
     }
 
-    throw new AppError(401, "Request body can't be empty");
+    throw new AppError(400, "Request body can't be empty");
   }
 
   /**
@@ -90,6 +90,6 @@ export class UsersController {
       successResponse(res, user, "User deleted successfully");
     }
 
-    throw new AppError(401, "parameter `id` is missing");
+    throw new AppError(400, "parameter `id` is missing");
   }
 }
