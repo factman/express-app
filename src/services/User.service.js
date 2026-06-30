@@ -8,7 +8,7 @@ import { User } from "../models/User.model.js";
  * @property {string} firstName
  * @property {string} lastName
  * @property {string} email
- * @property {string} password
+ * @property {string} passwordHash
  */
 
 export class UserService {
@@ -56,7 +56,7 @@ export class UserService {
 
   /**
    * @param {string} id
-   * @param {Partial<UserData>} userParam
+   * @param {Partial<Pick<UserData, 'firstName' | 'lastName'>>} userParam
    */
   async updateUser(id, userParam) {
     try {
