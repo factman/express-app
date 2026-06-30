@@ -3,6 +3,14 @@
 import { AppError } from "../helpers/errorHandlers.js";
 import { User } from "../models/User.model.js";
 
+/**
+ * @typedef {Object} UserData
+ * @property {string} firstName
+ * @property {string} lastName
+ * @property {string} email
+ * @property {string} password
+ */
+
 export class UserService {
   async getUsers() {
     try {
@@ -35,7 +43,7 @@ export class UserService {
   }
 
   /**
-   * @param {{ firstName: string; lastName: string; email: string; password: string; }} userParams
+   * @param {UserData} userParams
    */
   async createUser(userParams) {
     try {
@@ -48,7 +56,7 @@ export class UserService {
 
   /**
    * @param {string} id
-   * @param {{ firstName?: string; lastname?: string; role?: "admin" | "author" | "reader", isActive:?: boolean; }} userParam
+   * @param {Partial<UserData>} userParam
    */
   async updateUser(id, userParam) {
     try {

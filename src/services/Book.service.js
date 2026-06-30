@@ -3,6 +3,20 @@
 import { Book } from "../models/Book.model.js";
 import { AppError } from "../helpers/errorHandlers.js";
 
+/**
+ * @typedef {Object} BookData
+ * @property {string} title
+ * @property {string} description
+ * @property {string} isbn
+ * @property {number} publishedYear
+ * @property {string} genre
+ * @property {number} pageCount
+ * @property {number} price
+ * @property {number} quantity
+ * @property {string} author
+ * @property {string} category
+ */
+
 export class BookService {
   async getBooks() {
     try {
@@ -33,11 +47,11 @@ export class BookService {
   }
 
   /**
-   * @param {{ title: string; description: string; isbn: string; publishedYear: number; genre: string; pageCount: number; price: number; quantity: number; author: string; category: string }} bookParam
+   * @param {BookData} bookParam
    */
   async createBook(bookParam) {
     try {
-      const book = await User.create({ ...bookParam });
+      const book = await Book.create({ ...bookParam });
       return book.dataValues;
     } catch (err) {
       throw new AppError(400, "Invalid book parameters");
@@ -46,7 +60,7 @@ export class BookService {
 
   /**
    * @param {string} id
-   * @param {{ title?: string; description?: string; isbn?: string; publishedYear?: number; genre?: string; pageCount?: number; price?: number; quantity?: number; author?: string; category?: string; }} bookParam
+   * @param {Partial<BookData>} bookParam
    */
   async updatedBook(id, bookParam) {
     try {

@@ -34,7 +34,9 @@ app.get("/", async (req, res) => {
 app.get("/books", async (req, res) => {
   res.status(200).json({
     success: true,
-    data: await new BookService().getBook("3f7b91e5-2d64-4a0a-8c3f-5a9e2d7b1f6d"),
+    data: await new BookService().deleteBook(
+      "413c11af-e73f-4abb-99c4-62f7d864fdbf",
+    ),
     message: "Welcome to The Books Page",
   });
 });
