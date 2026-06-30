@@ -34,7 +34,7 @@ app.get("/", async (req, res) => {
 app.get("/books", async (req, res) => {
   res.status(200).json({
     success: true,
-    data: await new BookService().getBooks(),
+    data: await new BookService().getBook("3f7b91e5-2d64-4a0a-8c3f-5a9e2d7b1f6d"),
     message: "Welcome to The Books Page",
   });
 });
