@@ -1,6 +1,6 @@
 "use strict";
 
-import { Book } from "../models/Book.model";
+import { Book } from "../models/Book.model.js";
 import { AppError } from "../helpers/errorHandlers.js";
 
 export class BookService {
