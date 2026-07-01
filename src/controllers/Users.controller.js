@@ -1,8 +1,10 @@
-import { RequestHandler } from "express";
+import express from "express";
 import { UserService } from "../services/User.service.js";
 import { successResponse } from "../helpers/response.js";
 import { AppError } from "../helpers/errorHandlers.js";
 import { createHash } from "node:crypto";
+
+const { RequestHandler } = express;
 
 export class UsersController {
   /**
@@ -15,12 +17,18 @@ export class UsersController {
    */
   constructor(userService) {
     this.userService = userService;
+
+    this.getAllUsers = this.getAllUsers.bind(this);
+    this.getUserById = this.getUserById.bind(this);
+    this.createUser = this.createUser.bind(this);
+    this.updateUser = this.updateUser.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
   }
 
   /**
    * @type {RequestHandler}
    */
-  async getAllBooks(req, res) {
+  async getAllUsers(req, res) {
     const users = await this.userService.getUsers();
     successResponse(res, users, "Users retrieved successfully");
   }

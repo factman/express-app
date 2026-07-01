@@ -4,8 +4,8 @@ import {
   notFoundErrorHandler,
 } from "./src/helpers/errorHandlers.js";
 import { initDB } from "./src/sequelize.js";
-import { UserService } from "./src/services/User.service.js";
 import { BookService } from "./src/services/Book.service.js";
+import { usersRouter } from "./src/routers/users.router.js";
 
 const app = express();
 const port = process.env.PORT;
@@ -23,13 +23,7 @@ initDB()
   });
 
 // Routers init
-app.get("/", async (req, res) => {
-  res.status(200).json({
-    success: true,
-    data: await new UserService().getUsers(),
-    message: "Welcome to express app",
-  });
-});
+app.use("/api", usersRouter);
 
 app.get("/books", async (req, res) => {
   res.status(200).json({

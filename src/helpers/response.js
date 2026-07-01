@@ -1,4 +1,6 @@
-import { Response } from "express";
+import express from "express";
+
+const { Response } = express;
 
 /**
  * Send a standard JSON success response.
